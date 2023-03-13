@@ -23,4 +23,12 @@ public class Quai1 : QuaiVatDiChuyen
     {
         this.right = right;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("quai1"))
+        {
+
+            this.isRight = !this.isRight;
+        }
+    }
 }
