@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NhanVat : DiChuyenNhanVat
 {
+
     // Start is called before the first frame update
      void Start()
     {

@@ -10,6 +10,9 @@ public class DiChuyenNhanVat : MonoBehaviour
     public float vanToc;
     private bool battu = false;
     private bool isDangDungTrenSan;
+    private Animator animator;
+    public ParticleSystem psBui;
+    Quaternion rotion;
     // Start is called before the first frame update
     public void Start()
     {
@@ -18,16 +21,23 @@ public class DiChuyenNhanVat : MonoBehaviour
         vanToc = 0;
         rigidbody2D = GetComponent<Rigidbody2D>();
         isDangDungTrenSan = true;
+        animator = GetComponent<Animator>();
+        
 
     }
 
     // Update is called once per frame
     public void Update()
     {
+        animator.SetBool("isDungTrenSan", isDangDungTrenSan);
+        animator.SetFloat("vantoc", vanToc);
+        rotion = psBui.transform.localRotation;
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            //
 
+            rotion.y = 180;
+            psBui.transform.localRotation = rotion;
+            psBui.Play();
             if (!isRight)
             {
                 Vector2 scale = transform.localScale;
@@ -45,6 +55,10 @@ public class DiChuyenNhanVat : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            rotion.y = 0;
+            psBui.transform.localRotation = rotion;
+            psBui.Play();
+
             if (isRight)
             {
                 Vector2 scale = transform.localScale;
