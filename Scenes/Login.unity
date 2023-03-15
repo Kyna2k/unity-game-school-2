@@ -1279,6 +1279,8 @@ MonoBehaviour:
   editUser: {fileID: 1258735449}
   editPass: {fileID: 191509915}
   thongbao: {fileID: 157074692}
+  first: {fileID: 1258735449}
+  btn_login: {fileID: 534311308}
 --- !u!1 &1019663529
 GameObject:
   m_ObjectHideFlags: 0
