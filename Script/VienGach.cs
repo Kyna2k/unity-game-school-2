@@ -24,7 +24,7 @@ public class VienGach : MonoBehaviour
     {
         ContactPoint2D[] contacts = new ContactPoint2D[2];
         collision.GetContacts(contacts);
-        if (contacts[0].normal.y > 0 && contacts[0].normal.x <  0)
+        if (contacts[0].normal.y > 0 && contacts[0].normal.x ==  0 || contacts[0].normal.x < 0)
         {
             if(collision.gameObject.tag == "nhanvat")
             {

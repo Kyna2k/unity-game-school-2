@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 137567611449740792}
   m_Layer: 0
   m_Name: LW3_World01-hd_48
-  m_TagString: Untagged
+  m_TagString: nendat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 5184396354551455426}
   m_Layer: 0
   m_Name: LW3_World01-hd_47
-  m_TagString: Untagged
+  m_TagString: nendat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 6289148032964634228}
   m_Layer: 0
   m_Name: LW3_World01-hd_50
-  m_TagString: Untagged
+  m_TagString: nendat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 5255861586725807855}
   m_Layer: 0
   m_Name: LW3_World01-hd_53
-  m_TagString: Untagged
+  m_TagString: nendat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
