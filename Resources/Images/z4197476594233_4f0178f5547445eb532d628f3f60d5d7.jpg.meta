@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a0d3c0eb3fe71749bbb3c7bcf12fdba
+guid: 10d1f289af9775244a54072a8fad574d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,91 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: TileMap_1-hd_0
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 969
-        width: 151
-        height: 54
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9c08815412f5044c903452b502aef6b
-      internalID: 1850925982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TileMap_1-hd_1
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 912
-        width: 176
-        height: 51
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1add9082099fb26489f1673e0c65e5f4
-      internalID: -1639490227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TileMap_1-hd_2
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 577
-        width: 112
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d04b2cd45c245ad48b9a5e3f8936a01b
-      internalID: 847594732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TileMap_1-hd_3
-      rect:
-        serializedVersion: 2
-        x: 335
-        y: 743
-        width: 60
-        height: 111
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83f8f9722aadc884d958efce89673354
-      internalID: -1479816453
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -210,11 +126,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      TileMap_1-hd_0: 1850925982
-      TileMap_1-hd_1: -1639490227
-      TileMap_1-hd_3: -1479816453
-      TileMap_1-hd_2: 847594732
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
