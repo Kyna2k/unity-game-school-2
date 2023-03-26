@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NhanVat : DiChuyenNhanVat
@@ -9,11 +11,11 @@ public class NhanVat : DiChuyenNhanVat
     public Text diem;
     public GameObject Menu;
     public int vang;
+    public PlayableDirector lenong;
     // Start is called before the first frame update
      void Start()
     {
         base.Start();
-        diem.text = "0 x";
         vang = 0;   
     }
 
@@ -22,7 +24,11 @@ public class NhanVat : DiChuyenNhanVat
     { 
 
         base.Update();
-        diem.text = $"{vang} x";
+        if(diem != null )
+        {
+            diem.text = $"{vang} x";
+
+        }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Menu.SetActive(!Menu.active);
             
@@ -37,5 +43,16 @@ public class NhanVat : DiChuyenNhanVat
             Time.timeScale = 1;
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "daibat")
+        {
+            lenong.Play();
+        }
+        if(collision.gameObject.tag == "congquaman")
+        {
+            SceneManager.LoadScene("map2");
+        }
+    }
 }

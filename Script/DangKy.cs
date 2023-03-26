@@ -1,7 +1,10 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -36,8 +39,41 @@ public class DangKy : MonoBehaviour
     }
     public void Dangky()
     {
+        StartCoroutine(CheckLoginAPI());
+    }
+    public IEnumerator CheckLoginAPI()
+    {
         var username = editUser.text;
         var password = editPass.text;
-        btn_back.onClick.Invoke();
+        UserModel userModel = new UserModel(username, password);
+        string jsonStringRequest = JsonConvert.SerializeObject(userModel);
+
+        var request = new UnityWebRequest("https://hoccungminh.dinhnt.com/fpt/register", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonStringRequest);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+            thongbao.text = $"Khong thanh cong {request.error}";
+        }
+        else
+        {
+            var jsonString = request.downloadHandler.text.ToString();
+            LoginReponModel loginReponModel = JsonConvert.DeserializeObject<LoginReponModel>(jsonString);
+            if (loginReponModel.status == 0)
+            {
+                thongbao.text = $"{loginReponModel.notification}";
+            }
+            else
+            {
+
+                btn_back.onClick.Invoke();
+            }
+        }
+
     }
 }

@@ -12,6 +12,7 @@ public class DiChuyenNhanVat : MonoBehaviour
     private bool isDangDungTrenSan;
     private Animator animator;
     public ParticleSystem psBui;
+    public GameObject daibac;
     Quaternion rotion;
     // Start is called before the first frame update
     public void Start()
@@ -31,6 +32,7 @@ public class DiChuyenNhanVat : MonoBehaviour
     {
         animator.SetBool("isDungTrenSan", isDangDungTrenSan);
         animator.SetFloat("vantoc", vanToc);
+        animator.SetFloat("roixuong", rigidbody2D.velocity.y);
         rotion = psBui.transform.localRotation;
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -95,6 +97,7 @@ public class DiChuyenNhanVat : MonoBehaviour
 
             }
         }
+
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -104,5 +107,10 @@ public class DiChuyenNhanVat : MonoBehaviour
         {
             isDangDungTrenSan = true;
         }
+        if(collision.gameObject.CompareTag("kichhoatdaibat"))
+        {
+            daibac.SetActive(true);
+        }
     }
+  
 }
