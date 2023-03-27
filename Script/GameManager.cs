@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public Text ping;
     public void SpawnPlayer() {
         float random = Random.Range(-1f, 1f);
-        PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector2(this.transform.position.x * random, this.transform.position.y*random), Quaternion.identity, 0);
+        GameObject main = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector2(this.transform.position.x * random, this.transform.position.y*random), Quaternion.identity, 0);
+        GameObject.FindWithTag("MainCamera").GetComponent<CameraNe>().NhanVat = main;
         //SceneCamera.SetActive(false);
     }
     private void Update()
