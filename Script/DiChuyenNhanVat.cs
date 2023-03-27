@@ -2,107 +2,143 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiChuyenNhanVat : MonoBehaviour
+public class DiChuyenNhanVat : Photon.MonoBehaviour
 {
-    public new Rigidbody2D rigidbody2D;
+    public new Rigidbody2D rb;
     public bool isRight;
     public float speed;
     public float vanToc;
     private bool battu = false;
     private bool isDangDungTrenSan;
-    private Animator animator;
+    public Animator anmin;
     public ParticleSystem psBui;
+    public GameObject PlayerCamerera;
+    public PhotonView photonView;
+    public SpriteRenderer sr;
     Quaternion rotion;
+    private void Awake()
+    {
+        if (photonView.isMine)
+        {
+            //PlayerCamerera.SetActive(true);
+        }
+    }
     // Start is called before the first frame update
     public void Start()
     {
         isRight = true;
         speed = 8f;
         vanToc = 0;
-        rigidbody2D = GetComponent<Rigidbody2D>();
         isDangDungTrenSan = true;
-        animator = GetComponent<Animator>();
-        
+
 
     }
 
     // Update is called once per frame
     public void Update()
     {
-        animator.SetBool("isDungTrenSan", isDangDungTrenSan);
-        animator.SetFloat("vantoc", vanToc);
-        rotion = psBui.transform.localRotation;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (photonView.isMine)
         {
-
-            rotion.y = 180;
-            psBui.transform.localRotation = rotion;
-            psBui.Play();
-            if (!isRight)
+            anmin.SetBool("isDungTrenSan", isDangDungTrenSan);
+            anmin.SetFloat("vantoc", vanToc);
+            rotion = psBui.transform.localRotation;
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                Vector2 scale = transform.localScale;
-                scale.x *= scale.x > 0 ? 1 : -1;
-                transform.localScale = scale;
-                isRight = true;
+                rotion.y = 180;
+                psBui.transform.localRotation = rotion;
+                psBui.Play();
+
+                photonView.RPC("ChayPhai", PhotonTargets.AllBuffered);
+                transform.Translate(Time.deltaTime * speed, 0, 0);
+                vanToc = speed;
             }
-            transform.Translate(Time.deltaTime * speed, 0, 0);
-            vanToc = speed;
-
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            vanToc = 0;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rotion.y = 0;
-            psBui.transform.localRotation = rotion;
-            psBui.Play();
-
-            if (isRight)
+            else if (Input.GetKeyUp(KeyCode.RightArrow))
             {
-                Vector2 scale = transform.localScale;
-                scale.x *= scale.x > 0 ? -1 : 1;
-                transform.localScale = scale;
-                isRight = false;
+                vanToc = 0;
             }
-            transform.Translate(-Time.deltaTime * speed, 0, 0);
-
-            vanToc = speed;
-
-
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            vanToc = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isDangDungTrenSan)
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
+                rotion.y = 0;
+                psBui.transform.localRotation = rotion;
+                psBui.Play();
 
-                if (!battu)
-                {
+                photonView.RPC("ChayTrai", PhotonTargets.AllBuffered);
+                transform.Translate(-Time.deltaTime * speed, 0, 0);
 
-                    rigidbody2D.AddForce(new Vector2(0, 400));
-
-                }
-                else
-                {
-                    rigidbody2D.AddForce(new Vector2(0, 10));
-                }
-                isDangDungTrenSan = false;
+                vanToc = speed;
 
             }
+            else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                vanToc = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                photonView.RPC("NhayLen", PhotonTargets.AllBuffered);
+            }
         }
-        
+
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("nendat")
-            ||collision.gameObject.CompareTag("viengach"))
+        if (photonView.isMine)
         {
-            isDangDungTrenSan = true;
+            if (collision.gameObject.CompareTag("nendat")
+            || collision.gameObject.CompareTag("viengach"))
+            {
+                isDangDungTrenSan = true;
+            }
         }
+
+    }  
+    [PunRPC]
+    public void ChayPhai()
+    {
+
+        if (!isRight)
+        {
+            Vector2 scale = transform.localScale;
+            scale.x *= scale.x > 0 ? 1 : -1;
+            transform.localScale = scale;
+            isRight = true;
+        }
+
     }
+    [PunRPC]
+    public void ChayTrai()
+    {
+        
+        if (isRight)
+        {
+            Vector2 scale = transform.localScale;
+            scale.x *= scale.x > 0 ? -1 : 1;
+            transform.localScale = scale;
+            isRight = false;
+        }
+
+    }
+    [PunRPC]
+    public void NhayLen()
+    {
+        if (isDangDungTrenSan)
+        {
+
+            if (!battu)
+            {
+
+                rb.AddForce(new Vector2(0, 400));
+
+            }
+            else
+            {
+                rb.AddForce(new Vector2(0, 10));
+            }
+            isDangDungTrenSan = false;
+
+        }
+    }    
+    
+    
 }

@@ -13,8 +13,8 @@ public class NhanVat : DiChuyenNhanVat
      void Start()
     {
         base.Start();
-        diem.text = "0 x";
-        vang = 0;   
+        //diem.text = "0 x";
+        //vang = 0;   
     }
 
     // Update is called once per frame
@@ -22,20 +22,20 @@ public class NhanVat : DiChuyenNhanVat
     { 
 
         base.Update();
-        diem.text = $"{vang} x";
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            Menu.SetActive(!Menu.active);
+        //diem.text = $"{vang} x";
+        //if (Input.GetKeyDown(KeyCode.Escape)) {
+        //    Menu.SetActive(!Menu.active);
             
-        }
-        if (Menu.active)
-        {
-            Time.timeScale = 0;
+        //}
+        //if (Menu.active)
+        //{
+        //    Time.timeScale = 0;
 
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+        //}
+        //else
+        //{
+        //    Time.timeScale = 1;
+        //}
     }
     
 }
