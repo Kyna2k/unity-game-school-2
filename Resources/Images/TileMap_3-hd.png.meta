@@ -146,7 +146,7 @@ TextureImporter:
         width: 181
         height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,6 +154,69 @@ TextureImporter:
       bones: []
       spriteID: 02526d0279ddef547ad2255dc9125a58
       internalID: -1504477344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileMap_3-hd_2
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 687
+        width: 113
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4057ead612bcc42a61e73f28483fad
+      internalID: 737714877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileMap_3-hd_3
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 781
+        width: 112
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1715921c759a4c5498ff5e3d13fb45c8
+      internalID: -1470176930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileMap_3-hd_4
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 183
+        width: 21
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e170564f43af69e48b335b726fe0cd15
+      internalID: 105513724
       vertices: []
       indices: 
       edges: []
@@ -170,7 +233,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       TileMap_3-hd_1: -1504477344
+      TileMap_3-hd_2: 737714877
       TileMap_3-hd_0: -1945001893
+      TileMap_3-hd_4: 105513724
+      TileMap_3-hd_3: -1470176930
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
