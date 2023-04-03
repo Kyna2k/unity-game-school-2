@@ -167,7 +167,7 @@ TextureImporter:
         width: 59
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,6 +175,27 @@ TextureImporter:
       bones: []
       spriteID: 8e820d8524fc85941901561ffecdffa8
       internalID: 235687192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LW3_Assets-hd_3
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 1269
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3dfc69481c7de740a64c18b306c548a
+      internalID: 635617111
       vertices: []
       indices: 
       edges: []
@@ -193,6 +214,7 @@ TextureImporter:
       LW3_Assets-hd_1: -232780938
       LW3_Assets-hd_0: 1145811166
       LW3_Assets-hd_2: 235687192
+      LW3_Assets-hd_3: 635617111
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

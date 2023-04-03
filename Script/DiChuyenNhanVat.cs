@@ -13,6 +13,7 @@ public class DiChuyenNhanVat : MonoBehaviour
     private Animator animator;
     public ParticleSystem psBui;
     public GameObject daibac;
+    public GameObject viendan;
     Quaternion rotion;
     // Start is called before the first frame update
     public void Start()
@@ -96,6 +97,12 @@ public class DiChuyenNhanVat : MonoBehaviour
                 isDangDungTrenSan = false;
 
             }
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject _viendan = Instantiate(viendan);
+            _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
+            _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
         }
 
         
