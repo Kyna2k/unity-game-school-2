@@ -29,12 +29,15 @@ MonoBehaviour:
   RunInBackground: 1
   RpcList:
   - Chat
+  - ChayPhai
+  - ChayTrai
   - ColorRpc
   - DestroyRpc
   - DoJump
   - Flash
   - InstantiateRpc
   - Marco
+  - NhayLen
   - PickupItemInit
   - Polo
   - PunPickup
@@ -43,7 +46,4 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
-  - ChayPhai
-  - ChayTrai
-  - NhayLen
   DisableAutoOpenWizard: 1

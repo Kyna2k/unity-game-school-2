@@ -16,6 +16,7 @@ public class MenuControlGame : MonoBehaviour
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings(VersionGame);
+        Debug.Log("hello");
     }
 
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class MenuControlGame : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnConnectedToMaster()
+    public void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         Debug.Log("Connected");
@@ -36,15 +37,15 @@ public class MenuControlGame : MonoBehaviour
     }
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(CreateInputGame.text, new RoomOptions() { maxPlayers = 2 }, null);
+        PhotonNetwork.CreateRoom(CreateInputGame.text, new RoomOptions() { maxPlayers = 6 }, null);
     }
     public void JoinGame()
     {
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.maxPlayers = 2;
+        roomOptions.maxPlayers = 6;
         PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
     }
-    private void OnJoinedRoom()
+    public void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Man1");
     }
