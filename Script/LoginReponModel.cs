@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoginReponModel 
 {
-    public LoginReponModel(int status, string notification, string username, int score, string positionX, string positionY, string positionZ)
+    public LoginReponModel(string status, string notification, string username, string score, string positionX, string positionY, string positionZ)
     {
         this.status = status;
         this.notification = notification;
@@ -15,10 +15,10 @@ public class LoginReponModel
         this.positionZ = positionZ;
     }
 
-    public int status { get; set; }
+    public string status { get; set; }
     public string notification { get; set; }
     public string username { get; set; }
-    public int score { get; set; }
+    public string score { get; set; }
     public string positionX { get; set; }
     public string positionY { get; set; }
     public string positionZ { get; set; }

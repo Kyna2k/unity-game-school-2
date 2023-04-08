@@ -47,7 +47,7 @@ public class LoginUser : MonoBehaviour
         UserModel userModel = new UserModel(username, password);
         string jsonStringRequest = JsonConvert.SerializeObject(userModel);
 
-        var request = new UnityWebRequest("https://hoccungminh.dinhnt.com/fpt/login", "POST");
+        var request = new UnityWebRequest("http://localhost:3000/dangnhap", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonStringRequest);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -63,7 +63,7 @@ public class LoginUser : MonoBehaviour
         {
             var jsonString = request.downloadHandler.text.ToString();
             LoginReponModel loginReponModel = JsonConvert.DeserializeObject<LoginReponModel>(jsonString);
-            if(loginReponModel.status == 0) {
+            if(loginReponModel.status == "0") {
                 thongbao.text = $"{loginReponModel.notification}";
             }
             else

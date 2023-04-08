@@ -3,52 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DangKy : MonoBehaviour
+public class RestPass2 : MonoBehaviour
 {
-    public InputField editUser, editPass;
+    public InputField editUser, newpassword, otp;
+    public GameObject trangchu;
     public Text thongbao;
-    public Selectable first;
-    private EventSystem eventSystem;
-    public Button btn_Dangky;
-    public Button btn_back;
+
     // Start is called before the first frame update
     void Start()
     {
-        eventSystem = EventSystem.current;
-        first.Select();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
-        {
-            btn_Dangky.onClick.Invoke();
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Selectable next = eventSystem.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-            next?.Select();
-
-        }
+        
     }
-    public void Dangky()
+    public void ResetPass()
     {
-        StartCoroutine(CheckLoginAPI());
+        StartCoroutine(RestPassAPi());
     }
-    public IEnumerator CheckLoginAPI()
+    public IEnumerator RestPassAPi()
     {
         var username = editUser.text;
-        var password = editPass.text;
-        UserModel userModel = new UserModel(username, password);
-        string jsonStringRequest = JsonConvert.SerializeObject(userModel);
+        var _newpassword = newpassword.text;
+        var _otp = otp.text;
+        modelResetOTP modelResetOTP = new modelResetOTP(username, _newpassword, _otp);
+        string jsonStringRequest = JsonConvert.SerializeObject(modelResetOTP);
 
-        var request = new UnityWebRequest("http://localhost:3000/dangky", "POST");
+        var request = new UnityWebRequest("http://localhost:3000/resetPass", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonStringRequest);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -70,8 +57,9 @@ public class DangKy : MonoBehaviour
             }
             else
             {
-
-                btn_back.onClick.Invoke();
+                thongbao.text = "Thành công";
+                trangchu.SetActive(true);
+                gameObject.SetActive(false);
             }
         }
 
