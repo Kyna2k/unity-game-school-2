@@ -17,6 +17,7 @@ public class LoginUser : MonoBehaviour
     private EventSystem eventSystem;
     public Button btn_login;
     public static LoginReponModel loginReponModel;
+    public GameObject chongame;
     void Start()
     {
         eventSystem= EventSystem.current;
@@ -69,7 +70,8 @@ public class LoginUser : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Man1");
+                gameObject.SetActive(false);
+                chongame.SetActive(true);
             }
         }
 

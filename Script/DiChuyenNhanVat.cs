@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiChuyenNhanVat : MonoBehaviour
+public class DiChuyenNhanVat : Photon.MonoBehaviour
 {
     public new Rigidbody2D rigidbody2D;
     public bool isRight;
@@ -10,113 +10,123 @@ public class DiChuyenNhanVat : MonoBehaviour
     public float vanToc;
     private bool battu = false;
     private bool isDangDungTrenSan;
-    private Animator animator;
+    public Animator animator;
     public ParticleSystem psBui;
     public GameObject daibac;
     public GameObject viendan;
     Quaternion rotion;
+    public PhotonView photonView;
+    public SpriteRenderer sr;
+
     // Start is called before the first frame update
     public void Start()
     {
         isRight = true;
         speed = 8f;
         vanToc = 0;
-        rigidbody2D = GetComponent<Rigidbody2D>();
         isDangDungTrenSan = true;
-        animator = GetComponent<Animator>();
 
     }
 
     // Update is called once per frame
     public void Update()
     {
-        animator.SetBool("isDungTrenSan", isDangDungTrenSan);
-        animator.SetFloat("vantoc", vanToc);
-        animator.SetFloat("roixuong", rigidbody2D.velocity.y);
-        rotion = psBui.transform.localRotation;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (photonView.isMine)
         {
-
-            rotion.y = 180;
-            psBui.transform.localRotation = rotion;
-            psBui.Play();
-            if (!isRight)
+            animator.SetBool("isDungTrenSan", isDangDungTrenSan);
+            animator.SetFloat("vantoc", vanToc);
+            animator.SetFloat("roixuong", rigidbody2D.velocity.y);
+            rotion = psBui.transform.localRotation;
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                Vector2 scale = transform.localScale;
-                scale.x *= scale.x > 0 ? 1 : -1;
-                transform.localScale = scale;
-                isRight = true;
+
+                rotion.y = 180;
+                psBui.transform.localRotation = rotion;
+                psBui.Play();
+                if (!isRight)
+                {
+                    Vector2 scale = transform.localScale;
+                    scale.x *= scale.x > 0 ? 1 : -1;
+                    transform.localScale = scale;
+                    isRight = true;
+                }
+                transform.Translate(Time.deltaTime * speed, 0, 0);
+                vanToc = speed;
+
             }
-            transform.Translate(Time.deltaTime * speed, 0, 0);
-            vanToc = speed;
-
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            vanToc = 0;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rotion.y = 0;
-            psBui.transform.localRotation = rotion;
-            psBui.Play();
-
-            if (isRight)
+            else if (Input.GetKeyUp(KeyCode.RightArrow))
             {
-                Vector2 scale = transform.localScale;
-                scale.x *= scale.x > 0 ? -1 : 1;
-                transform.localScale = scale;
-                isRight = false;
+                vanToc = 0;
             }
-            transform.Translate(-Time.deltaTime * speed, 0, 0);
-
-            vanToc = speed;
-
-
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            vanToc = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isDangDungTrenSan)
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
+                rotion.y = 0;
+                psBui.transform.localRotation = rotion;
+                psBui.Play();
 
-                if (!battu)
+                if (isRight)
+                {
+                    Vector2 scale = transform.localScale;
+                    scale.x *= scale.x > 0 ? -1 : 1;
+                    transform.localScale = scale;
+                    isRight = false;
+                }
+                transform.Translate(-Time.deltaTime * speed, 0, 0);
+
+                vanToc = speed;
+
+
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                vanToc = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (isDangDungTrenSan)
                 {
 
-                    rigidbody2D.AddForce(new Vector2(0, 400));
+                    if (!battu)
+                    {
+
+                        rigidbody2D.AddForce(new Vector2(0, 400));
+
+                    }
+                    else
+                    {
+                        rigidbody2D.AddForce(new Vector2(0, 10));
+                    }
+                    isDangDungTrenSan = false;
 
                 }
-                else
-                {
-                    rigidbody2D.AddForce(new Vector2(0, 10));
-                }
-                isDangDungTrenSan = false;
-
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                GameObject _viendan = Instantiate(viendan);
+                _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
+                _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
             }
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GameObject _viendan = Instantiate(viendan);
-            _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
-            _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
-        }
+        
 
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("nendat")
-            ||collision.gameObject.CompareTag("viengach"))
+        if (photonView.isMine)
         {
-            isDangDungTrenSan = true;
+
+            if (collision.gameObject.CompareTag("nendat")
+                || collision.gameObject.CompareTag("viengach"))
+            {
+                isDangDungTrenSan = true;
+            }
+            if (collision.gameObject.CompareTag("kichhoatdaibat"))
+            {
+                daibac.SetActive(true);
+            }
         }
-        if(collision.gameObject.CompareTag("kichhoatdaibat"))
-        {
-            daibac.SetActive(true);
-        }
+
         
     }
   
