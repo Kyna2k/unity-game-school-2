@@ -15,5 +15,6 @@ public class UserModel
     public string positionZ { get; set; }
     public string positionY { get; set; }
     public string positionX { get; set; }
+    public string newpassword { get; set; }
 
 }
