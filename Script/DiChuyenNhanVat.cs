@@ -15,6 +15,8 @@ public class DiChuyenNhanVat : Photon.MonoBehaviour
     public GameObject PlayerCamerera;
     public PhotonView photonView;
     public SpriteRenderer sr;
+    public GameObject daibac;
+    public GameObject viendan;
     Quaternion rotion;
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class DiChuyenNhanVat : Photon.MonoBehaviour
         vanToc = 0;
         isDangDungTrenSan = true;
 
+        animator = GetComponent<Animator>();
 
     }
 
@@ -38,6 +41,11 @@ public class DiChuyenNhanVat : Photon.MonoBehaviour
     public void Update()
     {
         if (photonView.isMine)
+        animator.SetBool("isDungTrenSan", isDangDungTrenSan);
+        animator.SetFloat("vantoc", vanToc);
+        animator.SetFloat("roixuong", rigidbody2D.velocity.y);
+        rotion = psBui.transform.localRotation;
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             anmin.SetBool("isDungTrenSan", isDangDungTrenSan);
             anmin.SetFloat("vantoc", vanToc);
@@ -80,6 +88,14 @@ public class DiChuyenNhanVat : Photon.MonoBehaviour
         }
 
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject _viendan = Instantiate(viendan);
+            _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
+            _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
+        }
+
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -141,4 +157,11 @@ public class DiChuyenNhanVat : Photon.MonoBehaviour
     }    
     
     
+        if(collision.gameObject.CompareTag("kichhoatdaibat"))
+        {
+            daibac.SetActive(true);
+        }
+        
+    }
+  
 }

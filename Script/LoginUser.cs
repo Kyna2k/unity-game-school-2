@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +16,7 @@ public class LoginUser : MonoBehaviour
     public Selectable first;
     private EventSystem eventSystem;
     public Button btn_login;
+    public static LoginReponModel loginReponModel;
     void Start()
     {
         eventSystem= EventSystem.current;
@@ -35,15 +39,39 @@ public class LoginUser : MonoBehaviour
     }
     public void CheckLogin()
     {
+        StartCoroutine(CheckLoginAPI());
+    }
+    public IEnumerator CheckLoginAPI()
+    {
         var username = editUser.text;
         var password = editPass.text;
-        if(username.Equals("admin") && password.Equals("admin"))
+        UserModel userModel = new UserModel(username, password);
+        string jsonStringRequest = JsonConvert.SerializeObject(userModel);
+
+        var request = new UnityWebRequest("http://localhost:3000/dangnhap", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonStringRequest);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            SceneManager.LoadScene("Man1");
+            Debug.Log(request.error);
+            thongbao.text = $"Khong thanh cong {request.error}";
         }
         else
         {
-            thongbao.text = "Tài khoảng hoặc mật khẩu không chính xác";
-        }    
+            var jsonString = request.downloadHandler.text.ToString();
+            loginReponModel = JsonConvert.DeserializeObject<LoginReponModel>(jsonString);
+            if(loginReponModel.status == "0") {
+                thongbao.text = $"{loginReponModel.notification}";
+            }
+            else
+            {
+                SceneManager.LoadScene("Man1");
+            }
+        }
+
     }
 }
