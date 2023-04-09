@@ -24,7 +24,6 @@ public class DiChuyenNhanVat : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         isDangDungTrenSan = true;
         animator = GetComponent<Animator>();
-        
 
     }
 
@@ -118,6 +117,7 @@ public class DiChuyenNhanVat : MonoBehaviour
         {
             daibac.SetActive(true);
         }
+        
     }
   
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Quai1 : QuaiVatDiChuyen
 {
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,5 +32,23 @@ public class Quai1 : QuaiVatDiChuyen
 
             this.isRight = !this.isRight;
         }
+        ContactPoint2D[] contacts = new ContactPoint2D[2];
+
+        collision.GetContacts(contacts);
+        if(collision.gameObject.tag == "nhanvat")
+        {
+            if (collision.contacts[0].normal.y < 0) {
+                playsound("Sounds/Kick");
+                Destroy(gameObject);
+            }
+            else
+            {
+                 collision.gameObject.GetComponent<NhanVat>().dead();
+            }
+        }
+    }
+    public void playsound(string src)
+    {
+        audioSource.PlayOneShot(Resources.Load<AudioClip>(src));
     }
 }

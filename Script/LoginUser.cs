@@ -16,6 +16,7 @@ public class LoginUser : MonoBehaviour
     public Selectable first;
     private EventSystem eventSystem;
     public Button btn_login;
+    public static LoginReponModel loginReponModel;
     void Start()
     {
         eventSystem= EventSystem.current;
@@ -62,7 +63,7 @@ public class LoginUser : MonoBehaviour
         else
         {
             var jsonString = request.downloadHandler.text.ToString();
-            LoginReponModel loginReponModel = JsonConvert.DeserializeObject<LoginReponModel>(jsonString);
+            loginReponModel = JsonConvert.DeserializeObject<LoginReponModel>(jsonString);
             if(loginReponModel.status == "0") {
                 thongbao.text = $"{loginReponModel.notification}";
             }
