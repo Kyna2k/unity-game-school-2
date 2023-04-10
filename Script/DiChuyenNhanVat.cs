@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiChuyenNhanVat : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class DiChuyenNhanVat : MonoBehaviour
     public GameObject daibac;
     public GameObject viendan;
     Quaternion rotion;
+    public int soluongdan = 3;
+    public Text txt_soluongdan;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -30,6 +34,7 @@ public class DiChuyenNhanVat : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        txt_soluongdan.text = "Số lượng đạn : " + soluongdan;
         animator.SetBool("isDungTrenSan", isDangDungTrenSan);
         animator.SetFloat("vantoc", vanToc);
         animator.SetFloat("roixuong", rigidbody2D.velocity.y);
@@ -99,14 +104,19 @@ public class DiChuyenNhanVat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            GameObject _viendan = Instantiate(viendan);
-            _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
-            _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
+            if(soluongdan > 0)
+            {
+                GameObject _viendan = Instantiate(viendan);
+                _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
+                _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
+                soluongdan--;
+            }
+            
         }
 
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("nendat")
             ||collision.gameObject.CompareTag("viengach"))

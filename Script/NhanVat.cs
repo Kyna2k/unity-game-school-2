@@ -61,7 +61,15 @@ public class NhanVat : DiChuyenNhanVat
         }
         
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+       base.OnCollisionEnter2D(collision);
+        if(collision.gameObject.tag == "vuc")
+        {
+            dead();
+        }    
 
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "daibat")
@@ -80,6 +88,11 @@ public class NhanVat : DiChuyenNhanVat
         {
             StartCoroutine(saveVitri(collision.gameObject.transform));
         }
+        if(collision.gameObject.tag == "dan")
+        {
+            soluongdan += 3;
+            Destroy(collision.gameObject);
+        }    
     }
     public IEnumerator cleanThongBao()
     {
