@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6794400827668263437}
   - component: {fileID: 6794400827668263436}
   - component: {fileID: 6794400827668263424}
-  - component: {fileID: 6794400827668263427}
+  - component: {fileID: -5488926947767804228}
+  - component: {fileID: -8899101534229403193}
   m_Layer: 0
-  m_Name: Coins-hd_12
+  m_Name: con2
   m_TagString: coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +134,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 0.45}
   m_EdgeRadius: 0
---- !u!114 &6794400827668263427
+--- !u!50 &-5488926947767804228
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794400827668263439}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &-8899101534229403193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,6 +164,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6794400827668263439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61501338e913df84db8453af83302cc2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd03f26861f8e6540a379c2a4e4c4b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

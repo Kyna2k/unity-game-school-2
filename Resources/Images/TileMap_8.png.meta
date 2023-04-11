@@ -2104,9 +2104,9 @@ TextureImporter:
       TileMap_8_80: 2065512144
       TileMap_8_12: 1951791238
       TileMap_8_27: 267990742
-      TileMap_8_87: 884644890
-      TileMap_8_63: -1791218003
       TileMap_8_92: 228765874
+      TileMap_8_63: -1791218003
+      TileMap_8_87: 884644890
       TileMap_8_26: 1587749241
       TileMap_8_77: -2055831585
       TileMap_8_5: -599153190
@@ -2159,8 +2159,8 @@ TextureImporter:
       TileMap_8_7: -379041321
       TileMap_8_35: -161829430
       TileMap_8_30: -2003756682
-      TileMap_8_46: 476799973
       TileMap_8_90: 321425337
+      TileMap_8_46: 476799973
       TileMap_8_70: 974608864
       TileMap_8_85: 358879658
       TileMap_8_64: -1144709340

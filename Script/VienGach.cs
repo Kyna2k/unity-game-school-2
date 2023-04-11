@@ -9,11 +9,12 @@ public class VienGach : MonoBehaviour
     public float height;
     public GameObject minigach;
     private Vector2 originPosition;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         originPosition = transform.position;
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,15 +27,20 @@ public class VienGach : MonoBehaviour
         collision.GetContacts(contacts);
         if (contacts[0].normal.y > 0 && contacts[0].normal.x ==  0 || contacts[0].normal.x < 0)
         {
-            if(collision.gameObject.tag == "nhanvat")
+            PlaySounds("Sounds/Break");
+            if (collision.gameObject.tag == "nhanvat")
             {
                 StartCoroutine(GoUpAndDown());
                 GameObject mini = Instantiate(minigach);
-                Destroy(gameObject);
+                Destroy(gameObject,0.1f);
                 mini.transform.position = originPosition;
             }    
             
         }    
+    }
+    public void PlaySounds(string name)
+    {
+        audioSource.PlayOneShot(Resources.Load<AudioClip>(name));
     }
     IEnumerator GoUpAndDown()
     {

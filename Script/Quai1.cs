@@ -38,7 +38,6 @@ public class Quai1 : QuaiVatDiChuyen
         if(collision.gameObject.tag == "nhanvat")
         {
             if (collision.contacts[0].normal.y < 0) {
-                playsound("Sounds/Kick");
                 Destroy(gameObject);
             }
             else
@@ -46,9 +45,5 @@ public class Quai1 : QuaiVatDiChuyen
                  collision.gameObject.GetComponent<NhanVat>().dead();
             }
         }
-    }
-    public void playsound(string src)
-    {
-        audioSource.PlayOneShot(Resources.Load<AudioClip>(src));
     }
 }

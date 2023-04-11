@@ -47,6 +47,7 @@ public class showDanhSachGame : MonoBehaviour
                     g = Instantiate(button,transform);
                     g.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Tên: " +loginReponModel[i].username;
                     g.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Score: "+loginReponModel[i].score;
+                    g.transform.GetChild(2).gameObject.GetComponent<Text>().text = i + 1 + ""; ;
                 }
                 Destroy(button);
             }    

@@ -18,6 +18,7 @@ public class DiChuyenNhanVat : MonoBehaviour
     Quaternion rotion;
     public int soluongdan = 3;
     public Text txt_soluongdan;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     public void Start()
@@ -28,6 +29,7 @@ public class DiChuyenNhanVat : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         isDangDungTrenSan = true;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -99,6 +101,7 @@ public class DiChuyenNhanVat : MonoBehaviour
                     rigidbody2D.AddForce(new Vector2(0, 10));
                 }
                 isDangDungTrenSan = false;
+                PlaySounds("Sounds/Squish");
 
             }
         }
@@ -106,9 +109,11 @@ public class DiChuyenNhanVat : MonoBehaviour
         {
             if(soluongdan > 0)
             {
+
                 GameObject _viendan = Instantiate(viendan);
                 _viendan.transform.position = new Vector3(transform.position.x + (isRight ? 0.8f : -1), transform.position.y);
                 _viendan.GetComponent<VienDan>().setSpeed(isRight ? 5f : -5f);
+                PlaySounds("Sounds/Kick");
                 soluongdan--;
             }
             
@@ -119,7 +124,8 @@ public class DiChuyenNhanVat : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("nendat")
-            ||collision.gameObject.CompareTag("viengach"))
+            ||collision.gameObject.CompareTag("viengach")
+            || collision.gameObject.CompareTag("qua"))
         {
             isDangDungTrenSan = true;
         }
@@ -129,5 +135,9 @@ public class DiChuyenNhanVat : MonoBehaviour
         }
         
     }
-  
+    public void PlaySounds(string name)
+    {
+        audioSource.PlayOneShot(Resources.Load<AudioClip>(name));
+    }
+
 }

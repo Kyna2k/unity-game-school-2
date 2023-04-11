@@ -17,12 +17,15 @@ public class NhanVat : DiChuyenNhanVat
     public int vang;
     public PlayableDirector lenong;
     public bool die = false;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
-     void Start()
+    void Start()
     {
         base.Start();
-       ;
-        if(LoginUser.loginReponModel.score != "")
+        audioSource = GetComponent<AudioSource>();
+
+        if (LoginUser.loginReponModel.score != "")
         {
             vang = Int32.Parse(LoginUser.loginReponModel.score);
         }
@@ -74,6 +77,7 @@ public class NhanVat : DiChuyenNhanVat
     {
         if(collision.gameObject.tag == "daibat")
         {
+            PlaySounds("Sounds/jump");
             lenong.Play();
         }
         if(collision.gameObject.tag == "congquaman")
@@ -92,7 +96,11 @@ public class NhanVat : DiChuyenNhanVat
         {
             soluongdan += 3;
             Destroy(collision.gameObject);
-        }    
+        }
+        if(collision.gameObject.tag == "coin")
+        {
+            PlaySounds("Sounds/Coin");
+        }
     }
     public IEnumerator cleanThongBao()
     {
@@ -170,17 +178,23 @@ public class NhanVat : DiChuyenNhanVat
     }
     public void choilaivitrigannhat()
     {
-        float x = float.Parse(LoginUser.loginReponModel.positionX);
-        float y = float.Parse(LoginUser.loginReponModel.positionY);
-        float z = float.Parse(LoginUser.loginReponModel.positionZ);
-        if(LoginUser.loginReponModel.positionX == "" && LoginUser.loginReponModel.positionY == "" && LoginUser.loginReponModel.positionZ == "")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        {
-            gameObject.transform.position = new Vector3(x, y, z);
+           
+            if (LoginUser.loginReponModel.positionX == "" && LoginUser.loginReponModel.positionY == "" && LoginUser.loginReponModel.positionZ == "")
+            {
+            gameObject.transform.position = new Vector3(-7.81f, -1.12f, 0);
             Time.timeScale = 1;
-        }
+            }
+            else
+            {
+            float x = float.Parse(LoginUser.loginReponModel.positionX);
+            float y = float.Parse(LoginUser.loginReponModel.positionY);
+            float z = float.Parse(LoginUser.loginReponModel.positionZ);
+            gameObject.transform.position = new Vector3(x, y, z);
+                Time.timeScale = 1;
+            }
+
+        
+        
         die = false;
         Menu.SetActive(false);
         Menu.transform.GetChild(0).gameObject.SetActive(true);
@@ -191,5 +205,9 @@ public class NhanVat : DiChuyenNhanVat
         Menu.transform.GetChild(0).gameObject.SetActive(false);
         die = true;
         Time.timeScale = 0;
+    }
+    public void PlaySounds(string name)
+    {
+        audioSource.PlayOneShot(Resources.Load<AudioClip>(name));
     }
 }

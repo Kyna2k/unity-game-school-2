@@ -15,12 +15,13 @@ public class COIN : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("nhanvat"))
         {
             collision.gameObject.GetComponent<NhanVat>().vang +=10;
             Destroy(gameObject);
-        }    
+        }
+        
     }
 }
